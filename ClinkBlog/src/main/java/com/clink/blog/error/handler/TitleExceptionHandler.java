@@ -16,7 +16,7 @@ import com.clink.blog.vm.ResultVm;
 @ControllerAdvice
 public class TitleExceptionHandler {
 
-	@ExceptionHandler(RoleBasedException.class)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseBody
 	public ResponseEntity<ResultVm> processUnmergeException(final MethodArgumentNotValidException ex) {
 

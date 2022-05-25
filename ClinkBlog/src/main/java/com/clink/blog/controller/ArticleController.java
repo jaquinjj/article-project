@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.clink.blog.dao.ArticleRepository;
 import com.clink.blog.model.Article;
+import com.clink.blog.service.ArticleService;
 import com.clink.blog.utils.RepeatedRoleUser;
 import com.clink.blog.utils.RoleUser;
 import com.clink.blog.vm.ResultVm;
@@ -27,7 +28,7 @@ import com.clink.blog.vm.ResultVm;
 public class ArticleController {
 
 	@Autowired
-	ArticleRepository articleRepository;
+	ArticleService articleService;
 
  	
 	@RepeatedRoleUser({@RoleUser(role_name = "ROLE_USER"), @RoleUser(role_name = "ROLE_ADMIN")})
@@ -37,7 +38,7 @@ public class ArticleController {
 
 		ResultVm resultVm = new ResultVm();
 		resultVm.isSuccess = true;
-		resultVm.resultSet = articleRepository.findAll(pageable);
+		resultVm.resultSet = articleService.findAll(pageable);
 		return resultVm;
 	}
 
@@ -47,7 +48,7 @@ public class ArticleController {
 
 		ResultVm resultVm = new ResultVm();
 		resultVm.isSuccess = true;
-		resultVm.resultSet = articleRepository.save(article);
+		resultVm.resultSet = articleService.save(article);
 		return resultVm;
 	}
 
@@ -58,7 +59,7 @@ public class ArticleController {
 
 		ResultVm resultVm = new ResultVm();
 		resultVm.isSuccess = true;
-		resultVm.resultSet = articleRepository.findAll(pageable);
+		resultVm.resultSet = articleService.findAll(pageable);
 		return resultVm;
 	}
 }

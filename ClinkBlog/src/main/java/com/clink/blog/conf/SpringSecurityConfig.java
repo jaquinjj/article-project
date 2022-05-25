@@ -25,7 +25,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		@SuppressWarnings("deprecation")
 		User.UserBuilder users = User.withDefaultPasswordEncoder();
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-		manager.createUser(users.username("mmert").password("12345").roles("USER1").build());
+		manager.createUser(users.username("mmert").password("12345").roles("USER").build());
 		manager.createUser(users.username("admin").password("12").roles("USER", "ADMIN").build());
 		return manager;
 

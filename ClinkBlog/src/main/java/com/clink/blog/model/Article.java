@@ -15,11 +15,28 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "ARTICLE")
 @Entity
 public class Article {
+	public Article(  @Size(max = 100, message = "Title cannot be bigger than 100") String title,
+			@NotNull(message = "Author cannot be null") String author,
+			@NotNull(message = "Content cannot be null") String content,
+			@NotNull(message = "Date cannot be null") String date) {
+		super();
+ 		this.title = title;
+		this.author = author;
+		this.content = content;
+		this.date = date;
+	}
+
+	public Article() {
+		
+	}
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Size(max=100, message = "Title cannot be bigger than 100")
+	@NotNull(message = "Title cannot be null")
 	@Column(name = "TITLE")
 	private String title;
 
