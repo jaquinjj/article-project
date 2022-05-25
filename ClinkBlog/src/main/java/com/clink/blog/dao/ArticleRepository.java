@@ -11,9 +11,9 @@ import com.clink.blog.model.Article;
 @Repository
 public interface ArticleRepository extends CrudRepository<Article, Long>, PagingAndSortingRepository<Article, Long> {
 
-	public Page<Article> findAll(Pageable pageable);
-	public Article save(Article article);
-
+//	public Page<Article> findAll(Pageable pageable);
+//	public Article save(Article article);
+//	public Integer count(Article article);
 
 //	@Query("select count(*) from ARTICLE where date between  ")
 //	long countByCreatedAtBetween(Date startDate, Date endDate);

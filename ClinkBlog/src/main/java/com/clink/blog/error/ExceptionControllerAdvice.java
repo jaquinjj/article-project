@@ -15,6 +15,6 @@ public class ExceptionControllerAdvice {
 
 		ResultVm resultVm = new ResultVm();
 		resultVm.resultMessages.add(exception.getMessage());
-		return new ResponseEntity<ResultVm>(resultVm, HttpStatus.OK);
+		return new ResponseEntity<ResultVm>(resultVm, HttpStatus.UNAUTHORIZED);
 	}
 }

@@ -52,7 +52,7 @@ public class ArticleController {
 		return resultVm;
 	}
 
-	@RoleUser(role_name = "ROLE_ADMIN")
+	@RepeatedRoleUser({ @RoleUser(role_name = "ROLE_ADMIN")})
 	@GetMapping("/getArticlesStatistics")
 	public ResultVm getArticlesStatistics(@PageableDefault(page = 0, size = 20) @SortDefault.SortDefaults({
 			@SortDefault(sort = "title", direction = Sort.Direction.DESC) }) Pageable pageable) {
