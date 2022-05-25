@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.clink.blog.error.RoleBasedException;
 import com.clink.blog.vm.ResultVm;
 
 @ControllerAdvice
 public class TitleExceptionHandler {
 
-	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ExceptionHandler(RoleBasedException.class)
 	@ResponseBody
 	public ResponseEntity<ResultVm> processUnmergeException(final MethodArgumentNotValidException ex) {
 

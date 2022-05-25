@@ -12,25 +12,24 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-
-	
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/h2-console/*").permitAll().and().httpBasic();
+		http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
 
 		http.csrf().disable();
-		http.headers().frameOptions().disable();
 	}
- 
+
 	@Bean
 	public UserDetailsService userDetailsService() {
 
+		@SuppressWarnings("deprecation")
 		User.UserBuilder users = User.withDefaultPasswordEncoder();
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-		manager.createUser(users.username("user").password("password").roles("USER").build());
-		manager.createUser(users.username("admin").password("password").roles("USER", "ADMIN").build());
+		manager.createUser(users.username("mmert").password("12345").roles("USER1").build());
+		manager.createUser(users.username("admin").password("12").roles("USER", "ADMIN").build());
 		return manager;
 
 	}
+	
+ 
 }
