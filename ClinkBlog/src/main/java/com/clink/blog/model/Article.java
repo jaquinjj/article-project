@@ -1,5 +1,7 @@
 package com.clink.blog.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,32 +12,29 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.clink.blog.error.validator.ValidDate;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Table(name = "ARTICLE")
-@Entity
+@Entity(name="ARTICLE")
 public class Article {
-	public Article(  @Size(max = 100, message = "Title cannot be bigger than 100") String title,
+	public Article(@Size(max = 100, message = "Title cannot be bigger than 100") String title,
 			@NotNull(message = "Author cannot be null") String author,
 			@NotNull(message = "Content cannot be null") String content,
-			@NotNull(message = "Date cannot be null") String date) {
+			@NotNull(message = "Date cannot be null") Date date) {
 		super();
- 		this.title = title;
+		this.title = title;
 		this.author = author;
 		this.content = content;
-		this.date = date;
 	}
 
 	public Article() {
-		
+
 	}
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Size(max=100, message = "Title cannot be bigger than 100")
+	@Size(max = 100, message = "Title cannot be bigger than 100")
 	@NotNull(message = "Title cannot be null")
 	@Column(name = "TITLE")
 	private String title;
@@ -48,11 +47,10 @@ public class Article {
 	@NotNull(message = "Content cannot be null")
 	private String content;
 
-//	@ValidDate
-	@Column(name = "DATE")
-	@NotNull(message = "Date cannot be null")
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mmX")
+	@ValidDate
 	private String date;
+
+ 
 
 	public Long getId() {
 		return id;
@@ -93,4 +91,5 @@ public class Article {
 	public void setDate(String date) {
 		this.date = date;
 	}
+
 }

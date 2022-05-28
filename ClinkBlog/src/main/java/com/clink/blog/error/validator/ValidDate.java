@@ -18,7 +18,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = DateValidator.class)
 public @interface ValidDate {
 
-	String message() default "Check your date format!";
+	String message() default "Check your date format.Format must be ISO8601!";
 
 	Class<?>[] groups() default {};
 

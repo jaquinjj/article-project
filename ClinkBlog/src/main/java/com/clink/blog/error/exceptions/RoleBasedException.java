@@ -1,6 +1,11 @@
-package com.clink.blog.error;
+package com.clink.blog.error.exceptions;
 
 public class RoleBasedException extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public RoleBasedException () {
 
     }

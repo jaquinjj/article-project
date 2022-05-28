@@ -11,4 +11,6 @@ public interface ArticleService {
 
 	Article save(Article entity);
 
+	long countByCreatedAtLastSevenDays();
+
 }
