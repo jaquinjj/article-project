@@ -8,16 +8,33 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import static org.springframework.security.config.Customizer.withDefaults;
 
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
+public class SpringSecurityConfig {
 
-		http.csrf().disable();
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests((authz) -> {
+			try {
+				authz.anyRequest().authenticated().and().httpBasic();
+				http.csrf().disable();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}).httpBasic(withDefaults());
+		return http.build();
 	}
+
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
+//
+//		http.csrf().disable();
+//	}
 
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -30,6 +47,5 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		return manager;
 
 	}
-	
- 
+
 }
