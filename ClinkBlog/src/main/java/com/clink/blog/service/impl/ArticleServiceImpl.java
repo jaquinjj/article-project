@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.clink.blog.dao.ArticleRepository;
+import com.clink.blog.dto.ArticleStatisticDto;
 import com.clink.blog.model.Article;
 import com.clink.blog.service.ArticleService;
 
@@ -35,21 +36,24 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public long countByCreatedAtLastSevenDays() {
+	public ArticleStatisticDto countByCreatedAtLastSevenDays() {
 		ArrayList<Article> articleList = new ArrayList<>();
 		articleRepository.findAll().forEach(e -> articleList.add(e));
 
 		LocalDate lastWeek = LocalDateTime.fromDateFields(new Date()).toLocalDate();
 		DateTimeFormatter dateTimeFormatter = ISODateTimeFormat.dateTimeNoMillis();
 
+		ArticleStatisticDto articleStatisticDto = new ArticleStatisticDto();
 		long betweenDateCount = articleList.stream()
 				.filter(
 						x -> Days.daysBetween(lastWeek, LocalDateTime.parse(x.getDate(),dateTimeFormatter).toLocalDate()).getDays() >= -7
 						)
 				.collect(Collectors.toList())
 				.size();
+		
+		articleStatisticDto.setCount(betweenDateCount);
 
-		return betweenDateCount;
+		return articleStatisticDto;
 	}
 
 }

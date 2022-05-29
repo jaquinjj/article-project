@@ -1,9 +1,9 @@
-package com.clink.blog.vm;
+package com.clink.blog.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultVm {
+public class ResultDto {
 	public boolean isSuccess;
 	public Object  resultSet;
 	public List<String> resultMessages = new ArrayList<>();

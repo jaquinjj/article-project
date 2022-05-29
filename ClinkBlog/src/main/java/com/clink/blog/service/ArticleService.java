@@ -3,6 +3,7 @@ package com.clink.blog.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.clink.blog.dto.ArticleStatisticDto;
 import com.clink.blog.model.Article;
 
 public interface ArticleService {
@@ -11,6 +12,6 @@ public interface ArticleService {
 
 	Article save(Article entity);
 
-	long countByCreatedAtLastSevenDays();
+	ArticleStatisticDto countByCreatedAtLastSevenDays();
 
 }

@@ -19,8 +19,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.clink.blog.dto.ResultDto;
 import com.clink.blog.error.exceptions.RoleBasedException;
-import com.clink.blog.vm.ResultVm;
 
 @Aspect
 @Component
@@ -59,7 +59,7 @@ public class RoleControl {
 					String.format("User:%s, Roles:%s haven't authorize this page!", userName, userRoleListStr));
 		}
 
-		return new ResultVm();
+		return new ResultDto();
 
 	}
 

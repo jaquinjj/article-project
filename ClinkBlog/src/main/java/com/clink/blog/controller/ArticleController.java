@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.clink.blog.dto.ResultDto;
 import com.clink.blog.model.Article;
 import com.clink.blog.service.ArticleService;
 import com.clink.blog.utils.RepeatedRoleUser;
 import com.clink.blog.utils.RoleUser;
-import com.clink.blog.vm.ResultVm;
 
 @RestController
 @Validated
@@ -31,35 +31,35 @@ public class ArticleController {
  	
 	@RepeatedRoleUser({@RoleUser(role_name = "ROLE_USER"), @RoleUser(role_name = "ROLE_ADMIN")})
 	@GetMapping("/articles")
-	public ResultVm getAllArticles(@PageableDefault(page = 0, size = 5) @SortDefault.SortDefaults({
+	public ResultDto getAllArticles(@PageableDefault(page = 0, size = 5) @SortDefault.SortDefaults({
 			@SortDefault(sort = "title", direction = Sort.Direction.DESC) }) Pageable pageable) {
 
-		ResultVm resultVm = new ResultVm();
-		resultVm.isSuccess = true;
-		resultVm.resultMessages.add("İşlem Başarılı");
-		resultVm.resultSet = articleService.findAll(pageable);
-		return resultVm;
+		ResultDto resultDto = new ResultDto();
+		resultDto.isSuccess = true;
+		resultDto.resultMessages.add("İşlem Başarılı");
+		resultDto.resultSet = articleService.findAll(pageable);
+		return resultDto;
 	}
 
 	@RepeatedRoleUser({@RoleUser(role_name = "ROLE_USER"), @RoleUser(role_name = "ROLE_ADMIN")})
 	@PostMapping("/articles")
-	public ResultVm createArticle(@Valid @RequestBody Article article) {
+	public ResultDto createArticle(@Valid @RequestBody Article article) {
 
-		ResultVm resultVm = new ResultVm();
-		resultVm.isSuccess = true;
-		resultVm.resultMessages.add("İşlem Başarılı");
-		resultVm.resultSet = articleService.save(article);
-		return resultVm;
+		ResultDto resultDto = new ResultDto();
+		resultDto.isSuccess = true;
+		resultDto.resultMessages.add("İşlem Başarılı");
+		resultDto.resultSet = articleService.save(article);
+		return resultDto;
 	}
 
 	@RepeatedRoleUser({ @RoleUser(role_name = "ROLE_ADMIN")})
 	@GetMapping("/countByCreatedAtLastSevenDays")
-	public ResultVm countByCreatedAtLastSevenDays() {
+	public ResultDto countByCreatedAtLastSevenDays() {
 
-		ResultVm resultVm = new ResultVm();
-		resultVm.isSuccess = true;
-		resultVm.resultMessages.add("İşlem Başarılı");
-		resultVm.resultSet = articleService.countByCreatedAtLastSevenDays();
-		return resultVm;
+		ResultDto resultDto = new ResultDto();
+		resultDto.isSuccess = true;
+		resultDto.resultMessages.add("İşlem Başarılı");
+		resultDto.resultSet = articleService.countByCreatedAtLastSevenDays();
+		return resultDto;
 	}
 }

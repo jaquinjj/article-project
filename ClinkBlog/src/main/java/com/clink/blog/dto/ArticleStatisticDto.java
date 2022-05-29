@@ -1,6 +1,6 @@
-package com.clink.blog.vm;
-
-public class ArticleStatisticVm {
+package com.clink.blog.dto;
+ 
+public class ArticleStatisticDto {
 	private long count;
 
 	public long getCount() {
